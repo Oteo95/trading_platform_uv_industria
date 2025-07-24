@@ -1,0 +1,9 @@
+uvicorn
+fastapi
+jinja2
+openai
+pydantic
+numpy
+pandas
+httpx
+starlette

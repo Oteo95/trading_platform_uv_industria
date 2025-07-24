@@ -4,9 +4,6 @@ from pydantic import BaseModel
 from typing import List, Dict, Any, Optional, Union
 import pandas as pd
 import numpy as np
-import os
-import httpx
-import asyncio
 import logging
 
 class Event(BaseModel):

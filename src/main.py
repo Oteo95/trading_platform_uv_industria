@@ -6,8 +6,6 @@ import pandas as pd
 import numpy as np
 import os
 import httpx
-import asyncio
-import logging
 
 from PortfolioManager import *
 from benchmark import *
