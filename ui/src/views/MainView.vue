@@ -192,7 +192,7 @@ const selectedStrategies = ref([])
 onMounted(async () => {
   try {
     // Fetch available strategies
-    const strategiesResp = await fetch('http://localhost:8000/strategies')
+    const strategiesResp = await fetch('http://localhost:4000/strategies')
     const strategiesResult = await strategiesResp.json()
     
     if (strategiesResult.strategies) {
@@ -203,7 +203,7 @@ onMounted(async () => {
     }
 
     // Fetch CSV data from API endpoint
-    const resp = await fetch('http://localhost:8000/prices')
+    const resp = await fetch('http://localhost:4000/prices')
     const result = await resp.json()
     
     if (result.success) {
@@ -240,7 +240,7 @@ async function runBacktest() {
   try {
     if (selectedStrategies.value.length > 1) {
       // Multiple strategies - use multi-strategy endpoint
-      const resp = await fetch("http://localhost:8000/multi-strategy-backtest", {
+      const resp = await fetch("http://localhost:4000/multi-strategy-backtest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -267,7 +267,7 @@ async function runBacktest() {
       }
     } else {
       // Single strategy - use regular backtest endpoint for backward compatibility
-      const resp = await fetch("http://localhost:8000/backtest", {
+      const resp = await fetch("http://localhost:4000/backtest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prices: pricesData.value })
