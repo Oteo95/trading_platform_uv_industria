@@ -50,9 +50,12 @@ app = FastAPI()
 
 # Strategy Registry
 AVAILABLE_STRATEGIES = {
-    "estrategia_A": "/estrategia_A",
-    "estrategia_B": "/estrategia_B"
+    "estrategia_A": f"{os.environ['endpointA']}/estrategia_A",
+    "estrategia_B": f"{os.environ['endpointB']}/estrategia_B",
+    "estrategia_c": f"{os.environ['endpointC']}/estrategia_C"
 }
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
@@ -83,6 +86,13 @@ async def get_prices():
         }
     except Exception as e:
         return {"error": f"Failed to read CSV file: {str(e)}"}
+
+
+@app.get("/var_env")
+async def var_env():
+    
+    return {"environA": os.environ['endpointA']}
+
 
 
 @app.get("/strategies")
@@ -129,7 +139,7 @@ async def strategia_A(data: BacktestRequest):
             stock_stats.append({'ticker': "MSFT", 'trend_20d': data3.iloc[idx]["ma_20"], 'trend_60d': data3.iloc[idx]["ma_60"], 'volatility': data3.iloc[idx]["volatility_20"]})
         except IndexError:
             pass
-        advisor = StockAdvisor("")
+        advisor = StockAdvisor(os.environ["OPENAI_API_KEY"])
         trades.append(dict(advisor.get_recommendation(stock_stats)))
     return trades
 
