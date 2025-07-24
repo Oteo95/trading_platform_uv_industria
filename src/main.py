@@ -52,7 +52,6 @@ app = FastAPI()
 AVAILABLE_STRATEGIES = {
     "estrategia_A": f"{os.environ['endpointA']}/estrategia_A",
     "estrategia_B": f"{os.environ['endpointB']}/estrategia_B",
-    "estrategia_c": f"{os.environ['endpointC']}/estrategia_C"
 }
 
 
